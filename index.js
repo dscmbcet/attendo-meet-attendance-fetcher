@@ -6,7 +6,7 @@ const fs = require("fs");
 require("colors");
 
 const attendees = new Set();
-const minutes = 1; //Set Greater than 2
+const minutes = 3;
 
 const date = new Date();
 const dateString = `${date.getDate()}-${

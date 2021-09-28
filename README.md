@@ -10,4 +10,4 @@ Made in collaboration with Team Attendo
 
 ## .env Config
 
-`API_URL`
+`API_KEY`

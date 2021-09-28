@@ -15,24 +15,28 @@ const dateString = `${date.getDate()}-${
 
 const fetchAttendance = async () => {
   const URL = `${process.env.API_KEY}&id=${meetID}`;
-  const res = await fetch(URL);
-  const attendance = (await res.json()).attendance;
-  if (attendance) {
-    attendance.forEach((e) => attendees.add(e));
-    fs.writeFileSync(
-      `${meetID} ${dateString}.csv`,
-      `Name\n${[...attendees].join("\n")}`,
-      { flag: "w" }
-    );
-    console.log(
-      `${new Date().toLocaleTimeString()}`,
-      `: Fetched Attendance Now`.blue.bold
-    );
+  try {
+    const res = await fetch(URL);
+    const attendance = (await res.json()).attendance;
+    if (attendance) {
+      attendance.forEach((e) => attendees.add(e));
+      fs.writeFileSync(
+        `${meetID} ${dateString}.csv`,
+        `Name\n${[...attendees].join("\n")}`,
+        { flag: "w" }
+      );
+      console.log(
+        `${new Date().toLocaleTimeString()}`,
+        `: Fetched Attendance Now`.blue.bold
+      );
+    }
+  } catch (e) {
+    console.error("Some error occured".red);
   }
 };
 
 const meetID = readline
-  .question("Enter the meet ID / link: ".yellow.red)
+  .question("Enter the meet ID: ".yellow.red)
   .replace("https://meet.google.com/", "");
 
 if (meetID === "") {
@@ -43,9 +47,5 @@ if (meetID === "") {
 console.log(`Fetching attendance every ${minutes} minutes`.green.bold);
 fetchAttendance();
 cron.schedule(`*/${minutes} * * * *`, () => {
-  try {
-    fetchAttendance();
-  } catch (e) {
-    console.error("Some error occured".red);
-  }
+  fetchAttendance();
 });

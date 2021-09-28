@@ -21,7 +21,7 @@ const fetchAttendance = async () => {
     if (attendance) {
       attendance.forEach((e) => attendees.add(e));
       fs.writeFileSync(
-        `${meetID} ${dateString}.csv`,
+        `./attendances/${meetID} ${dateString}.csv`,
         `Name\n${[...attendees].join("\n")}`,
         { flag: "w" }
       );

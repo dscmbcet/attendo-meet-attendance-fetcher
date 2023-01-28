@@ -4,6 +4,7 @@
   "description": "Fetches attendees of a given meet every 5mins and adds them to a sheet",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "M Aswin Kishore",

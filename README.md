@@ -11,3 +11,18 @@ Made in collaboration with Team Attendo
 ## .env Config
 
 `API_KEY`
+
+## Setup
+
+`npm install`
+
+## Running
+
+- `npm start`
+
+- Enter the meet id in terminal and your attendances will be saved as `{meet-id} {DATE}.csv` at `/attendances` every 3 minutes
+
+  ![Script Running](./assets/script_running.png)
+
+- Note the bot will send a accept request to the meet to get attendance for the first time. Subsequent fetches won't need join permission
+
